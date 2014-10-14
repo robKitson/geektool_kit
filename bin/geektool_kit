@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'geektool_kit'
+require 'thor'
+require 'yaml'
+ 
+class MyCLI < Thor
+
+	BASE_FOLDER = File.expand_path "~/geektool_kit"
+	CONFIG_FILE = File.join(BASE_FOLDER, 'config.yml')
+
+  desc "setup", "Sets up the geektool_kit folder"
+  def setup
+	  Dir.mkdir BASE_FOLDER unless Dir.exists? BASE_FOLDER
+
+  	settings = {}
+  	if File.exists? CONFIG_FILE
+  		settings = YAML::load_file(CONFIG_FILE)
+  	end
+    
+    add_default_settings settings
+	  File.open(CONFIG_FILE, 'w') {|f| f.write settings.to_yaml }
+  end
+
+  no_commands do
+    def add_default_settings settings
+    	defaults = {}
+
+    	defaults.each  {|key, value| settings[key] = value unless settings.has_key? key }
+  		settings.delete_if { |key, value| defaults[key].nil? }
+    end
+  end
+end
+ 
+MyCLI.start(ARGV)

@@ -1,0 +1,35 @@
+#!/usr/bin/ruby
+
+require 'geektool_kit'
+
+title = "Top RAM processes"
+max_lines = 10
+args = ARGV
+
+while !args.first.nil? do
+  case args.first.downcase
+  when "-t"
+    title = args[1] unless args[1].nil?
+
+  when "-l"
+    max_lines = args[1].to_i unless args[1].nil?
+
+  else
+    puts "arg '#{args.first}' not recognized (value: '#{args[1]}')"
+  end
+  
+  args = args.drop 2
+
+end
+
+puts "#{title}\n"
+counter = 0
+total = 0
+
+GeektoolKit::MemRecord.get_records.sort.each do |record|
+
+  break if counter == 5 || total == max_lines
+
+  puts record.create_display_text
+  total += 1
+end
