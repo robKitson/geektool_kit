@@ -64,4 +64,18 @@ describe GeektoolKit::CpuRecord do
       expect(@big_record.create_display_text).to eq "big process              78.2%"
     end
   end
+
+  describe "colorize_line" do
+    it "should reset the color at the end of the line" do
+      expect(@big_record.colorize_line("asdf")).to end_with Colors.RESET
+    end
+
+    it "should set the color to RED if the record is critical" do
+      expect(@big_record.colorize_line("asdf")).to start_with Colors.RED
+    end
+
+    it "should set the color to DEFAULT if the record is in the normal range" do
+      expect(@small_record.colorize_line("asdf")).to start_with Colors.DEFAULT
+    end
+  end
 end

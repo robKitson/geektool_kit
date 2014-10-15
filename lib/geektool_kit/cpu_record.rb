@@ -37,7 +37,7 @@ module GeektoolKit
     end
 
     def print
-      puts "#{color}#{create_display_text}#{Colors.RESET}"
+      puts colorize_line(create_display_text)
     end
 
     def <=> other
@@ -49,7 +49,11 @@ module GeektoolKit
     end
 
     def create_display_text max_width = 30
-      create_line name, create_percent_display_text, max_width
+      create_line(name, create_percent_display_text, max_width)
+    end
+
+    def colorize_line line
+      "#{color}#{line}#{Colors.RESET}"
     end
 
     def self.get_data

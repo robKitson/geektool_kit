@@ -30,6 +30,6 @@ GeektoolKit::CpuRecord.get_records.sort.each do |record|
 
   break if counter == 5 || total == max_lines
 
-  puts record.create_display_text
+  record.print
   total += 1
 end
