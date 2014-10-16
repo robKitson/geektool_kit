@@ -3,6 +3,7 @@
 require 'geektool_kit'
 require 'thor'
 require 'yaml'
+require 'fileutils'
  
 class MyCLI < Thor
 
@@ -20,6 +21,13 @@ class MyCLI < Thor
     
     add_default_settings settings
 	  File.open(CONFIG_FILE, 'w') {|f| f.write settings.to_yaml }
+
+    geeklets = ["cpu_meter", "mem_meter", "cal"]
+    geeklets.each do |geeklet|
+      original_file = File.expand_path("#{File.expand_path(File.dirname(__FILE__))}/../geeklets/#{geeklet}.glet")
+      destination = File.expand_path("#{BASE_FOLDER}/#{geeklet}.glet")
+      FileUtils.cp original_file, destination
+    end
   end
 
   no_commands do
