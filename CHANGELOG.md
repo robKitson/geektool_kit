@@ -1,3 +1,9 @@
+### 0.3.1
+
+* bug fixes
+  * fixed encoding issue when a process had invalid characters
+  
+
 ### 0.3.0
 
 * enhancements
@@ -6,8 +12,6 @@
   * added mem_meter.glet
   * added cpu_meter.glet
   * added cal.glet
-
-* bug fixes
 
 
 ### 0.2.1

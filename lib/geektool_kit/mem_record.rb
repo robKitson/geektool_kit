@@ -27,13 +27,12 @@ module GeektoolKit
     end
 
     def self.get_data
-      %x{ps -arcwwwxo "command rss" -m}
+      `ps -arcwwwxo "command rss" -m`
     end
 
     def self.get_records
 
-      data = self.get_data.split("\n")
-      
+      data = self.get_data.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, :replace => "#").split("\n")
       records = []
       data.each do |d|
         matches = /(?<name>.*)\s(?<bytes>\d+)/.match(d)
@@ -43,7 +42,7 @@ module GeektoolKit
       return records
     end
 
-    
+
     private
 
     def get_display_unit

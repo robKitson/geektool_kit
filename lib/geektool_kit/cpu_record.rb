@@ -3,17 +3,17 @@ require 'geektool_kit/line_formatter'
 module GeektoolKit
   class CpuRecord
     include GeektoolKit::LineFormatter
-    
+
     NORMAL_RANGE = 0..9
     ELEVATED_RANGE = 10..19
     WARNING_RANGE = 20..29
     CRITICAL_RANGE = 30..200
-    
+
     attr_accessor :name
     attr_accessor :percent
 
     def initialize line
-      
+
       self.name = line[:name].strip
       self.percent = line[:percent].to_f
     end
@@ -62,8 +62,8 @@ module GeektoolKit
 
     def self.get_records
 
-      data = self.get_data.split("\n")
-      
+      data = self.get_data.encode("UTF-8", "binary", :invalid => :replace, :undef => :replace, :replace => "#").split("\n")
+
       records = []
       data.each do |d|
         matches = /(?<name>.*)\s+(?<percent>\d{1,}\.\d+)/.match(d)
