@@ -1,3 +1,8 @@
+### 0.4.0
+
+* enhancements
+  * adding iStats geeklets
+
 ### 0.3.0
 
 * enhancements

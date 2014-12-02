@@ -1,6 +1,6 @@
 # GeektoolKit
 
-GeektoolKit is tool for generating and running geeklets.
+GeektoolKit is a tool for generating and running geeklets.
 
 ## Installation
 
